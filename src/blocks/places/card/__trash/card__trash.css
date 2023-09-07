@@ -1,0 +1,18 @@
+.card__trash {
+    cursor: pointer;
+    border: none;
+    position: absolute;
+    z-index: 1;
+    border-radius: 30%;
+    background: none;
+    top: 18px;
+    right: 15px;
+}
+
+.card__trash_display_hide {
+    display: none;
+}
+
+.card__trash:hover {
+    opacity: 0.8;
+}

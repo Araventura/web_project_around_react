@@ -1,0 +1,13 @@
+.cover__wrapper {
+    z-index: 2;
+    max-height: 70%;
+    position: relative;
+}
+
+
+@media screen and (max-width: 768px) {
+    .cover__wrapper {
+        max-width: 80%;
+        
+    }
+}
