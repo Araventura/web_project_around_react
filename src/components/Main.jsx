@@ -1,11 +1,34 @@
+import { useEffect, useState } from "react";
 import PopupWithForm from "./PopupWithForm";
+import { api } from "../utils/api";
 
 function Main(props) {
+    const [userName, setUserName] = useState("Ara Ventura")
+    const [userDescription, setUserDescription] = useState("webdev")
+    const [userAvatar, setUserAvatar] = useState("")
+    const [cards, setCards] = useState([])
+
+    useEffect(() => {
+        api.getUserData().then((res) => {
+            return res.json()
+        }).then((res) => {
+            setUserName(res.name);
+            setUserDescription(res.about);
+            setUserAvatar(res.avatar);
+        })
+
+        api.loadCards().then((res) => {
+            return res.json()
+        }).then((res) => {
+            setCards(res);
+        })
+    }, [])
+
     return (
         <main className="page preload">
           <section className="profile">
             <div className="profile__pic">
-              <img className="profile__pic-img" src="#" alt="Profile image of user" />
+              <img className="profile__pic-img" src={userAvatar} alt="Profile image of user" />
               <img onClick={props.onEditAvatarClick}
                 className="profile__pic-button"
                 src="<%=require('./images/Pencil.png')%>"
@@ -14,7 +37,7 @@ function Main(props) {
             </div>
             <div className="profile__info">
               <div className="profile__wrapper">
-                <h2 className="profile__name"></h2>
+                <h2 className="profile__name">{userName}</h2>
                         <button onClick={props.onEditProfileClick} className="profile__button profile__button-edit">
                   <img
                     src="<%=require('./images/editbutton.png')%>"
@@ -22,7 +45,7 @@ function Main(props) {
                   />
                 </button>
               </div>
-              <h3 className="profile__description"></h3>
+                    <h3 className="profile__description">{userDescription}</h3>
             </div>
             <button onClick={props.onAddPlaceClick} className="profile__button profile__button-add">
               <img
@@ -109,24 +132,25 @@ function Main(props) {
           </div>
     
           <section className="places">
-            <ul className="card"></ul>
+            <ul className="card">
+                    {cards.map((card) => {
+                        return (
+                            <li key={card._id} className="card__item">
+                    <button className="card__trash">
+                      <img src="<%=require('./images/trash.png')%>" alt="Trash Button" />
+                    </button>
+                    <img className="card__image" src={card.link} alt={card.name} />
+                    <div className="card__wrapper">
+                        <span className="card__title">{card.name}</span>
+                      <button className="card__like"></button>
+                    </div>
+                    <div className="card__counter">
+                        <span className="card__counter_likes">{card.likes.length}</span>
+                    </div>
+                  </li>)
+                })}
+            </ul>
           </section>
-    
-          <template id="card_template">
-            <li className="card__item">
-              <button className="card__trash">
-                <img src="<%=require('./images/trash.png')%>" alt="Trash Button" />
-              </button>
-              <img className="card__image" src="#" alt="" />
-              <div className="card__wrapper">
-                <span className="card__title"></span>
-                <button className="card__like"></button>
-              </div>
-              <div className="card__counter">
-                <span className="card__counter_likes"></span>
-              </div>
-            </li>
-          </template>
         </main>
       );
 }
