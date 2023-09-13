@@ -1,28 +1,30 @@
-function Main() {
+import PopupWithForm from "./PopupWithForm";
+
+function Main(props) {
     return (
-        <main class="page preload">
-          <section class="profile">
-            <div class="profile__pic">
-              <img class="profile__pic-img" src="#" alt="Profile image of user" />
-              <img
-                class="profile__pic-button"
+        <main className="page preload">
+          <section className="profile">
+            <div className="profile__pic">
+              <img className="profile__pic-img" src="#" alt="Profile image of user" />
+              <img onClick={props.onEditAvatarClick}
+                className="profile__pic-button"
                 src="<%=require('./images/Pencil.png')%>"
                 alt="edit button image"
               />
             </div>
-            <div class="profile__info">
-              <div class="profile__wrapper">
-                <h2 class="profile__name"></h2>
-                <button class="profile__button profile__button-edit">
+            <div className="profile__info">
+              <div className="profile__wrapper">
+                <h2 className="profile__name"></h2>
+                        <button onClick={props.onEditProfileClick} className="profile__button profile__button-edit">
                   <img
                     src="<%=require('./images/editbutton.png')%>"
                     alt="edit button image"
                   />
                 </button>
               </div>
-              <h3 class="profile__description"></h3>
+              <h3 className="profile__description"></h3>
             </div>
-            <button class="profile__button profile__button-add">
+            <button onClick={props.onAddPlaceClick} className="profile__button profile__button-add">
               <img
                 src="<%=require('./images/addbutton.png')%>"
                 alt="add button image"
@@ -30,152 +32,98 @@ function Main() {
             </button>
           </section>
     
-          <div class="popup" id="popup-profile">
-            <div class="popup__container">
-              <div class="popup__close-button" id="popup-close-profile">
-                <img
-                  src="<%=require('./images/CloseIcon.png')%>"
-                  alt="Closing Icon"
-                />
-              </div>
-              <form id="form-edit-profile" class="form" novalidate>
-                <h2 class="popup__title">Editar perfil</h2>
-                <div class="popup__input-wrapper" id="input-name-wrapper">
-                  <input
-                    class="popup__input"
+            <PopupWithForm title="Editar Perfil" name="popup-profile" isOpen={props.isEditProfilePopupOpen} onClose={props.closeAllPopups}>
+            <div className="popup__input-wrapper" id="input-name-wrapper">
+                <input
+                    className="popup__input"
                     id="input-name"
-                    minlength="2"
-                    maxlength="40"
+                    minLength="2"
+                    maxLength="40"
                     required
-                  />
-                  <span class="popup__input-name-error-message popup__error-message"></span>
+                />
+                <span className="popup__input-name-error-message popup__error-message"></span>
                 </div>
-    
-                <div class="popup__input-wrapper" id="input-description-wrapper">
-                  <input
-                    class="popup__input"
+
+                <div className="popup__input-wrapper" id="input-description-wrapper">
+                <input
+                    className="popup__input"
                     id="input-description"
-                    minlength="2"
-                    maxlength="200"
+                    minLength="2"
+                    maxLength="200"
                     required
-                  />
-                  <span class="popup__input-description-error-message popup__error-message"></span>
+                />
+                <span className="popup__input-description-error-message popup__error-message"></span>
                 </div>
-                <button id="edit-profile-button" class="popup__button">
-                  Guardar
+                <button id="edit-profile-button" className="popup__button">
+                Guardar
                 </button>
-              </form>
-            </div>
-            <div class="popup__backdrop"></div>
-          </div>
+            </PopupWithForm>
     
-          <div class="popup" id="popup-card">
-            <div class="popup__container">
-              <div class="popup__close-button" id="popup-close-add-card">
+            <PopupWithForm title="Nuevisimo Lugar" name="add-card" isOpen={props.isAddPlacePopupOpen} onClose={props.closeAllPopups}>
+                <div className="popup__input-wrapper" id="input-title-wrapper">
+                    <input
+                        className="popup__input"
+                        id="input-title"
+                        minLength="2"
+                        maxLength="40"
+                        required
+                    />
+                    <span className="popup__input-title-error-message popup__error-message"></span>
+                    </div>
+                    <div className="popup__input-wrapper" id="input-url-wrapper">
+                    <input type="url" className="popup__input" id="input-url" required />
+                    <span className="popup__input-url-error-message popup__error-message"></span>
+                </div>
+                <button id="create-card-button" className="popup__button">
+                    Crear
+                </button>
+            </PopupWithForm>
+
+            <PopupWithForm title="Actualizar foto de perfil" name="popup-edit-profile-pic" isOpen={props.isEditAvatarPopupOpen} onClose={props.closeAllPopups}>
+                <div className="popup__input-wrapper" id="input-avatar-url-wrapper">
+                    <input
+                        type="url"
+                        className="popup__input"
+                        id="input-avatar-url"
+                        required
+                    />
+                    <span className="popup__input-avatar-url-error-message popup__error-message"></span>
+                </div>
+                <button id="edit-profile-pic-button" className="popup__button">
+                    Guardar perfil
+                </button>
+            </PopupWithForm>
+
+          <div className="cover">
+            <div className="cover__wrapper">
+              <div className="cover__close-button" id="cover-close-button">
                 <img
                   src="<%=require('./images/CloseIcon.png')%>"
                   alt="Closing Icon"
                 />
               </div>
-              <form id="form-card" class="form" novalidate>
-                <div class="popup__input-wrapper" id="input-title-wrapper">
-                  <h2 class="popup__title">Nuevo Lugar</h2>
-                  <input
-                    class="popup__input"
-                    id="input-title"
-                    minlength="2"
-                    maxlength="40"
-                    required
-                  />
-                  <span class="popup__input-title-error-message popup__error-message"></span>
-                </div>
-                <div class="popup__input-wrapper" id="input-url-wrapper">
-                  <input type="url" class="popup__input" id="input-url" required />
-                  <span class="popup__input-url-error-message popup__error-message"></span>
-                </div>
-                <button id="create-card-button" class="popup__button">
-                  Crear
-                </button>
-              </form>
+              <img className="cover__image" src="#" alt="Cover Backdrop" />
+              <h3 className="cover__subtitle"></h3>
             </div>
-            <div class="popup__backdrop"></div>
+            <div className="cover__backdrop"></div>
           </div>
     
-          <div class="popup" id="popup-delete-image">
-            <div class="popup__container">
-              <div class="popup__close-button" id="popup-close-delete-image">
-                <img
-                  src="<%=require('./images/CloseIcon.png')%>"
-                  alt="Closing Icon"
-                />
-              </div>
-              <form id="form-delete-image" class="form" novalidate>
-                <h2 class="popup__title">Estas seguro?</h2>
-                <button id="delete-image-button" class="popup__button">
-                  Si
-                </button>
-              </form>
-            </div>
-            <div class="popup__backdrop"></div>
-          </div>
-    
-          <div class="popup" id="popup-edit-profile-pic">
-            <div class="popup__container">
-              <div class="popup__close-button" id="popup-close-edit-profile-image">
-                <img
-                  src="<%=require('./images/CloseIcon.png')%>"
-                  alt="Closing Icon"
-                />
-              </div>
-              <form id="form-update-profile-image" class="form" novalidate>
-                <h2 class="popup__title">Cambiar foto de perfil</h2>
-                <div class="popup__input-wrapper" id="input-avatar-url-wrapper">
-                  <input
-                    type="url"
-                    class="popup__input"
-                    id="input-avatar-url"
-                    required
-                  />
-                  <span class="popup__input-avatar-url-error-message popup__error-message"></span>
-                </div>
-                <button id="edit-profile-pic-button" class="popup__button">
-                  Guardar perfil
-                </button>
-              </form>
-            </div>
-            <div class="popup__backdrop"></div>
-          </div>
-    
-          <div class="cover">
-            <div class="cover__wrapper">
-              <div class="cover__close-button" id="cover-close-button">
-                <img
-                  src="<%=require('./images/CloseIcon.png')%>"
-                  alt="Closing Icon"
-                />
-              </div>
-              <img class="cover__image" src="#" alt="Cover Backdrop" />
-              <h3 class="cover__subtitle"></h3>
-            </div>
-            <div class="cover__backdrop"></div>
-          </div>
-    
-          <section class="places">
-            <ul class="card"></ul>
+          <section className="places">
+            <ul className="card"></ul>
           </section>
     
           <template id="card_template">
-            <li class="card__item">
-              <button class="card__trash">
+            <li className="card__item">
+              <button className="card__trash">
                 <img src="<%=require('./images/trash.png')%>" alt="Trash Button" />
               </button>
-              <img class="card__image" src="#" alt="" />
-              <div class="card__wrapper">
-                <span class="card__title"></span>
-                <button class="card__like"></button>
+              <img className="card__image" src="#" alt="" />
+              <div className="card__wrapper">
+                <span className="card__title"></span>
+                <button className="card__like"></button>
               </div>
-              <div class="card__counter">
-                <span class="card__counter_likes"></span>
+              <div className="card__counter">
+                <span className="card__counter_likes"></span>
               </div>
             </li>
           </template>
