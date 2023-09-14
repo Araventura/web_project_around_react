@@ -12,7 +12,7 @@ function ImagePopup(props) {
           src={props.selectedCard.link}
           alt="Cover Backdrop"
         />
-        <h3 className="cover__subtitle"></h3>
+        <h3 className="cover__subtitle">{props.selectedCard.name}</h3>
       </div>
       <div className="cover__backdrop"></div>
     </div>
