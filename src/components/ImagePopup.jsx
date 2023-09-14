@@ -1,11 +1,11 @@
-import ClosingIcon from "../images/CloseIcon.png";
+import closingIcon from "../images/CloseIcon.png";
 
 function ImagePopup(props) {
   return (
     <div className="cover">
       <div className="cover__wrapper">
         <div className="cover__close-button" id="cover-close-button">
-          <img onClick={props.onClose} src={ClosingIcon} alt="Closing Icon" />
+          <img onClick={props.onClose} src={closingIcon} alt="Closing Icon" />
         </div>
         <img
           className="cover__image"

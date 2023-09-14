@@ -1,4 +1,4 @@
-import TrashIcon from "../images/trash.png";
+import trashIcon from "../images/trash.png";
 
 function Card({ card, onCardClick }) {
   function handleClick() {
@@ -8,7 +8,7 @@ function Card({ card, onCardClick }) {
   return (
     <li className="card__item">
       <button className="card__trash">
-        <img src={TrashIcon} alt="Trash Button" />
+        <img src={trashIcon} alt="Trash Button" />
       </button>
       <img
         onClick={handleClick}

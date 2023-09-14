@@ -2,15 +2,14 @@ import { useEffect, useState } from "react";
 import PopupWithForm from "./PopupWithForm";
 import { api } from "../utils/api";
 import Card from "./Card";
-import PencilIcon from "../images/Pencil.png";
-import AddIcon from "../images/addbutton.png";
-import ClosingIcon from "../images/CloseIcon.png";
-import EditIcon from "../images/editbutton.png";
+import pencilIcon from "../images/Pencil.png";
+import addIcon from "../images/addbutton.png";
+import editIcon from "../images/editbutton.png";
 import ImagePopup from "./ImagePopup";
 
 function Main(props) {
-  const [userName, setUserName] = useState("Ara Ventura");
-  const [userDescription, setUserDescription] = useState("webdev");
+  const [userName, setUserName] = useState("");
+  const [userDescription, setUserDescription] = useState("");
   const [userAvatar, setUserAvatar] = useState("");
   const [cards, setCards] = useState([]);
 
@@ -43,12 +42,12 @@ function Main(props) {
           <img
             className="profile__pic-img"
             src={userAvatar}
-            alt="Profile image of user"
+            alt="Profile of user"
           />
           <img
             className="profile__pic-button"
-            src={PencilIcon}
-            alt="edit button image"
+            src={pencilIcon}
+            alt="edit button"
           />
         </div>
         <div className="profile__info">
@@ -58,7 +57,7 @@ function Main(props) {
               onClick={props.onEditProfileClick}
               className="profile__button profile__button-edit"
             >
-              <img src={EditIcon} alt="edit button image" />
+              <img src={editIcon} alt="edit button" />
             </button>
           </div>
           <h3 className="profile__description">{userDescription}</h3>
@@ -67,7 +66,7 @@ function Main(props) {
           onClick={props.onAddPlaceClick}
           className="profile__button profile__button-add"
         >
-          <img src={AddIcon} alt="add button image" />
+          <img src={addIcon} alt="add button" />
         </button>
       </section>
 
